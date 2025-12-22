@@ -33,15 +33,13 @@ export default function About() {
           </h2>
 
           <p className="text-gray-300 text-lg leading-relaxed">
-            I’m a Computer Science undergraduate specializing in Big Data
-            Analytics with hands-on experience in data science, machine
-            learning, and full-stack development.
+            Computer Science undergraduate specializing in Big Data Analytics, with hands-on experience in data science, machine learning, and analytical system development. Experience includes working with real-world datasets, performing preprocessing and modeling, and building data-driven solutions to extract meaningful insights.
+
+
           </p>
 
           <p className="text-gray-400 text-lg mt-6">
-            I enjoy working on real-world problems — building intelligent
-            dashboards, scalable systems, and data-driven solutions that
-            create measurable impact.
+            Enjoys developing scalable, intelligent systems—from interactive dashboards to machine learning–powered applications—that transform complex data into actionable outcomes and measurable impact.
           </p>
         </motion.div>
       </div>
