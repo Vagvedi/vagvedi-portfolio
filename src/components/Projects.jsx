@@ -68,7 +68,7 @@ export default function Projects() {
         >
           <span className="absolute top-4 right-4 text-xs px-3 py-1
                            rounded-full bg-purple-500/20 text-purple-300">
-            Featured Project
+            Featured Project (In Progress)
           </span>
 
           <p className="text-sm text-purple-400 mb-2">
