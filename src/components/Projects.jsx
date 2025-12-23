@@ -4,6 +4,8 @@ const projects = [
   {
     title: "CanteenConnect",
     type: "Full-Stack System",
+    completed: true,
+    github: "https://github.com/Vagvedi/CanteenConnect",
     desc: "A full-stack canteen management system for digital food ordering with authentication and role-based access.",
     points: [
       "Designed student & admin roles with secure authentication",
@@ -15,6 +17,7 @@ const projects = [
   {
     title: "Laura Larsen Research",
     type: "Research Project",
+    completed: false,
     desc: "A research-focused project involving structured data analysis and interpretation with academic rigor.",
     points: [
       "Conducted systematic data collection and preprocessing",
@@ -26,6 +29,8 @@ const projects = [
   {
     title: "Weather & Data Analytics Dashboard",
     type: "Analytics Dashboard",
+    completed: true,
+    github: "https://github.com/Vagvedi/weather-analytics",
     desc: "A data analytics project focused on collecting, cleaning, and visualizing weather and time-series data.",
     points: [
       "Processed real-world datasets using Pandas and NumPy",
@@ -37,6 +42,7 @@ const projects = [
   {
     title: "Amazon Clone",
     type: "Full-Stack Application (In Progress)",
+    completed: false,
     desc: "A scalable Amazon-inspired e-commerce platform focusing on core shopping and checkout workflows.",
     points: [
       "Implemented product listing, cart, and order flow",
@@ -68,7 +74,7 @@ export default function Projects() {
         >
           <span className="absolute top-4 right-4 text-xs px-3 py-1
                            rounded-full bg-purple-500/20 text-purple-300">
-            Featured Project (In Progress)
+            Featured Project
           </span>
 
           <p className="text-sm text-purple-400 mb-2">
@@ -80,7 +86,7 @@ export default function Projects() {
           </h3>
 
           <p className="text-gray-300 max-w-4xl mb-6">
-            An AI-powered digital twin of a student designed to predict burnout,
+            An AI-powered digital twin of a student that predicts burnout,
             attendance risk, and academic performance using real-world data,
             machine learning models, and a modern full-stack cloud architecture.
           </p>
@@ -88,7 +94,7 @@ export default function Projects() {
           <ul className="space-y-2 text-gray-400 mb-6">
             <li>• Modeled student behavior using ML-driven predictive logic</li>
             <li>• Identified academic risk patterns from attendance and performance data</li>
-            <li>• Designed a scalable architecture for real-time insights and analysis</li>
+            <li>• Designed scalable architecture for real-time insights</li>
           </ul>
 
           <div className="flex flex-wrap gap-3">
@@ -153,6 +159,19 @@ export default function Projects() {
                 </span>
               ))}
             </div>
+
+            {/* GitHub button ONLY for completed projects */}
+            {p.completed && p.github && (
+              <a
+                href={p.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block mt-4 text-sm text-purple-400
+                           hover:text-purple-300 transition"
+              >
+                View GitHub →
+              </a>
+            )}
           </motion.div>
         ))}
       </div>
