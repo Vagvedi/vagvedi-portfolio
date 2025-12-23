@@ -1,4 +1,5 @@
 import { motion } from "framer-motion"
+import { useEffect, useState } from "react"
 
 const projects = [
   {
@@ -6,6 +7,7 @@ const projects = [
     type: "Full-Stack System",
     completed: true,
     github: "https://github.com/Vagvedi/CanteenConnect",
+    repo: "Vagvedi/CanteenConnect",
     desc: "A full-stack canteen management system for digital food ordering with authentication and role-based access.",
     points: [
       "Designed student & admin roles with secure authentication",
@@ -31,6 +33,7 @@ const projects = [
     type: "Analytics Dashboard",
     completed: true,
     github: "https://github.com/Vagvedi/weather-analytics",
+    repo: "Vagvedi/weather-analytics",
     desc: "A data analytics project focused on collecting, cleaning, and visualizing weather and time-series data.",
     points: [
       "Processed real-world datasets using Pandas and NumPy",
@@ -41,8 +44,9 @@ const projects = [
   },
   {
     title: "Amazon Clone",
-    type: "Full-Stack Application (In Progress)",
+    type: "Full-Stack Application",
     completed: false,
+    inProgress: true,
     desc: "A scalable Amazon-inspired e-commerce platform focusing on core shopping and checkout workflows.",
     points: [
       "Implemented product listing, cart, and order flow",
@@ -52,6 +56,26 @@ const projects = [
     tech: ["React", "Node.js", "MongoDB", "Stripe"],
   },
 ]
+
+/* ⭐ GitHub stars hook */
+function useGitHubStars(repo) {
+  const [stars, setStars] = useState(null)
+
+  useEffect(() => {
+    if (!repo) return
+
+    fetch(`https://api.github.com/repos/${repo}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.stargazers_count !== undefined) {
+          setStars(data.stargazers_count)
+        }
+      })
+      .catch(() => {})
+  }, [repo])
+
+  return stars
+}
 
 export default function Projects() {
   return (
@@ -68,9 +92,7 @@ export default function Projects() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
           className="relative p-8 rounded-2xl border border-white/10
-                     bg-gradient-to-br from-purple-500/10 to-indigo-500/10
-                     hover:from-purple-500/15 hover:to-indigo-500/15
-                     transition-all"
+                     bg-gradient-to-br from-purple-500/10 to-indigo-500/10"
         >
           <span className="absolute top-4 right-4 text-xs px-3 py-1
                            rounded-full bg-purple-500/20 text-purple-300">
@@ -92,9 +114,9 @@ export default function Projects() {
           </p>
 
           <ul className="space-y-2 text-gray-400 mb-6">
-            <li>• Modeled student behavior using ML-driven predictive logic</li>
-            <li>• Identified academic risk patterns from attendance and performance data</li>
-            <li>• Designed scalable architecture for real-time insights</li>
+            <li>• ML-based student behavior modeling</li>
+            <li>• Academic risk and performance prediction</li>
+            <li>• Scalable system design for real-time insights</li>
           </ul>
 
           <div className="flex flex-wrap gap-3">
@@ -114,66 +136,94 @@ export default function Projects() {
               </span>
             ))}
           </div>
+
+          {/* In Progress Badge */}
+          <div className="mt-6 inline-flex items-center gap-2
+                          text-sm text-yellow-300">
+            <span className="w-2 h-2 rounded-full bg-yellow-400 animate-pulse" />
+            In Progress
+          </div>
         </motion.div>
       </div>
 
       {/* OTHER PROJECTS */}
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10">
-        {projects.map((p, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: i * 0.1 }}
-            className="bg-white/5 backdrop-blur-xl border border-white/10
-                       rounded-2xl p-6
-                       hover:-translate-y-2 hover:shadow-2xl
-                       transition-all duration-300"
-          >
-            <p className="text-xs text-purple-400 mb-2">
-              {p.type}
-            </p>
+        {projects.map((p, i) => {
+          const stars = useGitHubStars(p.completed ? p.repo : null)
 
-            <h3 className="text-2xl font-semibold mb-3">
-              {p.title}
-            </h3>
-
-            <p className="text-gray-300 mb-4">
-              {p.desc}
-            </p>
-
-            <ul className="list-disc list-inside text-gray-400 space-y-1 mb-5">
-              {p.points.map((pt, idx) => (
-                <li key={idx}>{pt}</li>
-              ))}
-            </ul>
-
-            <div className="flex flex-wrap gap-2">
-              {p.tech.map((t) => (
-                <span
-                  key={t}
-                  className="text-xs px-3 py-1 bg-white/10 rounded-full"
-                >
-                  {t}
+          return (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              className="relative bg-white/5 backdrop-blur-xl border border-white/10
+                         rounded-2xl p-6 hover:-translate-y-2
+                         transition-all duration-300"
+            >
+              {/* In Progress Badge */}
+              {p.inProgress && (
+                <span className="absolute top-4 right-4
+                                 flex items-center gap-2
+                                 text-xs px-3 py-1 rounded-full
+                                 bg-yellow-500/20 text-yellow-300">
+                  <span className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse" />
+                  In Progress
                 </span>
-              ))}
-            </div>
+              )}
 
-            {/* GitHub button ONLY for completed projects */}
-            {p.completed && p.github && (
-              <a
-                href={p.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block mt-4 text-sm text-purple-400
-                           hover:text-purple-300 transition"
-              >
-                View GitHub →
-              </a>
-            )}
-          </motion.div>
-        ))}
+              <p className="text-xs text-purple-400 mb-2">
+                {p.type}
+              </p>
+
+              <h3 className="text-2xl font-semibold mb-3">
+                {p.title}
+              </h3>
+
+              <p className="text-gray-300 mb-4">
+                {p.desc}
+              </p>
+
+              <ul className="list-disc list-inside text-gray-400 space-y-1 mb-5">
+                {p.points.map((pt, idx) => (
+                  <li key={idx}>{pt}</li>
+                ))}
+              </ul>
+
+              <div className="flex flex-wrap gap-2 mb-4">
+                {p.tech.map((t) => (
+                  <span
+                    key={t}
+                    className="text-xs px-3 py-1 bg-white/10 rounded-full"
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
+
+              {/* GitHub + Stars (completed only) */}
+              {p.completed && p.github && (
+                <div className="flex items-center gap-4 text-sm">
+                  <a
+                    href={p.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-purple-400 hover:text-purple-300 transition"
+                  >
+                    View GitHub →
+                  </a>
+
+                  {stars !== null && (
+                    <span className="text-gray-400">
+                      ⭐ {stars}
+                    </span>
+                  )}
+                </div>
+              )}
+            </motion.div>
+          )
+        })}
       </div>
     </section>
   )
