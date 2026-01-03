@@ -98,7 +98,7 @@ export default function Projects() {
             <li>• Designed scalable architecture for real-time insights</li>
           </ul>
 
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-3 mb-6">
             {[
               "Python",
               "Machine Learning",
@@ -115,6 +115,17 @@ export default function Projects() {
               </span>
             ))}
           </div>
+
+          {/* 🔥 FEATURED PROJECT VIEW BUTTON (ADDED) */}
+          <a
+            href="https://github.com/Vagvedi/DigiTwin"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block mt-2 text-sm text-purple-400
+                       hover:text-purple-300 transition"
+          >
+            View GitHub →
+          </a>
         </motion.div>
       </div>
 
