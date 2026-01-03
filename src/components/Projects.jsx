@@ -30,7 +30,7 @@ const projects = [
     title: "Weather & Data Analytics Dashboard",
     type: "Analytics Dashboard",
     completed: true,
-    github: "https://github.com/Vagvedi/weather-analytics",
+    github: "https://github.com/Vagvedi/Weather-Analytics",
     desc: "A data analytics project focused on collecting, cleaning, and visualizing weather and time-series data.",
     points: [
       "Processed real-world datasets using Pandas and NumPy",
