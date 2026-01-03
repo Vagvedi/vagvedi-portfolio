@@ -42,7 +42,8 @@ const projects = [
   {
     title: "Amazon Clone",
     type: "Full-Stack Application (In Progress)",
-    completed: false,
+    completed: true,
+    github: "https://github.com/Vagvedi/Amazon-Clone",
     desc: "A scalable Amazon-inspired e-commerce platform focusing on core shopping and checkout workflows.",
     points: [
       "Implemented product listing, cart, and order flow",
